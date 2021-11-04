@@ -1,0 +1,26 @@
+<view class="">
+  <van-cell-group>
+    <van-field id="username" clearable value="{{ username }}" required label="姓名" placeholder="请输入姓名" bind:change="onTextChange" />
+    
+    <van-field id="mobile" clearable value="{{ mobile }}" required label="手机号" type="phone" placeholder="请输入手机号" bind:change="onTextChange" />
+    
+    <van-field id="identity_card" clearable value="{{ identityCard }}" required label="身份证号" placeholder="请输入身份证号" bind:change="onTextChange" />
+    
+    <van-field value="{{ visitTime }}" required is-link readonly label="到访时间" placeholder="点击选择到访时间" bind:click-input="showPopup" />
+    <van-calendar show="{{ showVisitPicker }}" bind:close="onClose" bind:confirm="onConfirm" />
+    
+    <van-field id="health_code" required label="健康码">
+      <van-uploader slot="input" file-list="{{healthCode}}" deletable="{{ true }}" max-count="1" max-size="500*1024" />
+    </van-field>
+    
+    <van-field id="trip_code" required label="行程码">
+      <van-uploader slot="input" file-list="{{tripCode}}" deletable="{{ true }}" max-count="1" max-size="500*1024" />
+    </van-field>
+    
+    <van-field id="license_plate" clearable value="{{ licensePlate }}" label="车牌号码" placeholder="请输入车牌号码" bind:change="onTextChange" />
+    
+    <van-field id="remark" autosize clearable value="{{ remark }}" label="备注" placeholder="请输入备注" type="textarea" maxlength="64" bind:change="onTextChange" />
+  </van-cell-group>
+
+  <van-button type="primary" style="margin: 20px 0;">提交</van-button>
+</view>
