@@ -1,0 +1,11 @@
+<view>
+
+  <include src="../landing.wxml" />
+
+  <van-row custom-class="mb-20">
+    <van-col span="10" offset="6">
+      <van-button type="danger" custom-class="w-auto-important">撤消</van-button>
+    </van-col>
+  </van-row>
+
+</view>

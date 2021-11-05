@@ -9,8 +9,28 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
+    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    date: '',
+    show: false,
   },
+
+  onDisplay() {
+    this.setData({ show: true });
+  },
+  onClose() {
+    this.setData({ show: false });
+  },
+  formatDate(date: any) {
+    date = new Date(date);
+    return `${date.getMonth() + 1}/${date.getDate()}`;
+  },
+  onConfirm(event: any) {
+    this.setData({
+      show: false,
+      date: this.formatDate(event.detail),
+    });
+  },
+
   // 事件处理函数
   bindViewTap() {
     wx.navigateTo({
@@ -24,7 +44,22 @@ Page({
   },
   bindB() {
     wx.navigateTo({
-      url: '../landing/landing',
+      url: '../landing/admin/landing',
+    })
+  },
+  bindUserLanding() {
+    wx.navigateTo({
+      url: '../landing/user/landing',
+    })
+  },
+  bindReject() {
+    wx.navigateTo({
+      url: '../reject/reject',
+    })
+  },
+  bindPass() {
+    wx.navigateTo({
+      url: '../pass/pass',
     })
   },
   onLoad() {

@@ -1,4 +1,3 @@
-<!--index.wxml-->
 <view class="container">
   <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}">
@@ -17,9 +16,11 @@
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <view class="usermotto">
-    
-  </view>
-  <van-button type="primary" bind:click="bindA">主要按钮</van-button>
-  <van-button type="info" bind:click="bindB">主要按钮</van-button>
+
+  <van-button type="default" bind:click="bindA">创建</van-button>
+  <van-button type="primary" bind:click="bindB">管理员详情</van-button>
+  <van-button type="info" bind:click="bindUserLanding">用户详情</van-button>
+  <van-button type="warning" bind:click="bindPass">通过</van-button>
+  <van-button type="danger" bind:click="bindReject">驳回</van-button>
+
 </view>

@@ -1,8 +1,0 @@
-/* pages/landing.wxss */
-.mb-40 {
-  margin-bottom: 40px;
-}
-
-.w-auto-important {
-  width: 100% !important;
-}

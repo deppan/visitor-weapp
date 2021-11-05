@@ -8,7 +8,7 @@ Page({
     licensePlate: '',
     healthCode: [],
     tripCode: [],
-    remark:'',
+    remark: '',
   },
   formatDate(date: number | string | Date) {
     date = new Date(date);
@@ -36,4 +36,9 @@ Page({
       visitTime: this.formatDate(event.detail),
     });
   },
+  onSubmit() {
+    wx.redirectTo({
+      url: '../landing/user/landing',
+    })
+  }
 })

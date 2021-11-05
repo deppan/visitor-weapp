@@ -1,36 +1,21 @@
-<!--pages/landing.wxml-->
-<view>
+<van-cell-group>
+  <van-cell title="姓名" value="内容" />
 
-  <van-cell-group>
-    <van-cell title="姓名" value="内容" />
+  <van-cell title="电话号码" value="内容" />
 
-    <van-cell title="电话号码" value="内容" />
+  <van-cell title="身份证号" value="内容" />
 
-    <van-cell title="身份证号" value="内容" />
+  <view style="display: flex; flex-direction: column; ">
+    <van-cell title="健康码" border="{{ false }}" />
+    <van-image width="100%" height="auto" fit="widthFix" src="https://img.yzcdn.cn/vant/cat.jpeg" style="margin: 0 var(--cell-horizontal-padding,16px);" />
+  </view>
 
-    <view style="display: flex; flex-direction: column; ">
-      <van-cell title="图片" border="{{ false }}" />
-      <van-image width="100%" height="auto" fit="widthFix" src="https://img.yzcdn.cn/vant/cat.jpeg" style="margin: 0 var(--cell-horizontal-padding,16px);" />
-    </view>
+  <view style="display: flex; flex-direction: column; ">
+    <van-cell title="行程码" border="{{ false }}" />
+    <van-image width="100%" height="auto" fit="widthFix" src="https://img.yzcdn.cn/vant/cat.jpeg" style="margin: 0 var(--cell-horizontal-padding,16px);" bind:click="preview" />
+  </view>
 
-    <view style="display: flex; flex-direction: column; ">
-      <van-cell title="图片" border="{{ false }}" />
-      <van-image width="100%" height="auto" fit="widthFix" src="https://img.yzcdn.cn/vant/cat.jpeg" style="margin: 0 var(--cell-horizontal-padding,16px);" bind:click="preview" />
-    </view>
+  <van-cell title="车牌号码" value="内容" />
 
-    <van-cell title="车牌号码" value="内容" />
-
-    <van-cell title="备注" value="内容" border="{{ false }}" custom-class="mb-40" />
-  </van-cell-group>
-
-  <van-row gutter="20" custom-class="fixed">
-    <van-col span="11" offset="1">
-      <van-button type="primary" custom-class="w-auto-important">主要按钮</van-button>
-    </van-col>
-    <van-col span="11">
-      <van-button type="warning" custom-class="w-auto-important">主要按钮</van-button>
-    </van-col>
-
-  </van-row>
-
-</view>
+  <van-cell title="备注" value="内容" border="{{ false }}" custom-class="mb-40" />
+</van-cell-group>

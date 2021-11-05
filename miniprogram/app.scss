@@ -25,8 +25,25 @@
   flex-direction: column;
 }
 
+.items-center {
+  align-items: center;
+}
+
+.self-center {
+  align-self: center;
+}
+
 .fixed {
   position: fixed;
+}
+
+.absolute {
+  position: absolute;
+}
+
+.my-20 {
+  margin-top: 20rpx;
+  margin-bottom: 20rpx;
 }
 
 .w-auto {

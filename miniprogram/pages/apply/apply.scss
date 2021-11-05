@@ -1,7 +1,11 @@
 #health_code .van-field__control {
-    height: auto
-  }
+  height: auto
+}
 
-#trip_code .van-field__control{
+#trip_code .van-field__control {
   height: auto;
+}
+
+.calendar-index--van-calendar__confirm {
+  width: 100% !important;
 }

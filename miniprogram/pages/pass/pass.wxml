@@ -1,0 +1,9 @@
+<view>
+  <view class="flex flex-col items-center">
+    <icon class="icon-box-img" type="success" size="93" />
+    <icon class="icon-box-img" type="waiting" size="93"></icon>
+  </view>
+  <van-cell-group>
+    <van-cell id="visit_time" title="访问时间" value="2021-11-04" value-class="abc" border="{{ false }}" />
+  </van-cell-group>
+</view>

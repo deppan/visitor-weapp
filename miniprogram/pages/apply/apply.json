@@ -1,9 +1,5 @@
 {
+  "navigationBarTitleText": "创建申请",
   "usingComponents": {
-    "van-field": "@vant/weapp/field/index",
-    "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-    "van-popup": "@vant/weapp/popup/index",
-    "van-calendar": "@vant/weapp/calendar/index",
-    "van-uploader": "@vant/weapp/uploader/index"
   }
 }
