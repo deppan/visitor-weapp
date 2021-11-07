@@ -27,6 +27,10 @@
     "van-cell-group": "@vant/weapp/cell-group/index",
     "van-image": "@vant/weapp/image/index",
     "van-row": "@vant/weapp/row/index",
-    "van-col": "@vant/weapp/col/index"
+    "van-col": "@vant/weapp/col/index",
+    "recycle-view": "miniprogram-recycle-view/recycle-view",
+    "recycle-item": "miniprogram-recycle-view/recycle-item",
+    "van-collapse": "@vant/weapp/collapse/index",
+    "van-collapse-item": "@vant/weapp/collapse-item/index"
   }
 }

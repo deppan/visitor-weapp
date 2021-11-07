@@ -1,34 +1,45 @@
 // index.ts
 // 获取应用实例
-const app = getApp<IAppOption>()
+import createRecycleContext from 'miniprogram-recycle-view';
 
 Page({
   data: {
-    motto: 'Hello World',
+    activeNames: ['1'],
     userInfo: {},
+    newList: [{ id: 1, title: "1", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 2, title: "2", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 3, title: "3", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 4, title: "4", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 5, title: "5", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
-    date: '',
-    show: false,
+  },
+  onChange(event: any) {
+    console.log(event.detail)
+    this.setData({
+      activeNames: event.detail,
+    });
+  },
+  onReady: function () {
+    var ctx = createRecycleContext({
+      id: 'recycleId',
+      dataKey: 'recycleList',
+      page: this,
+      itemSize: {
+        width: 162,
+        height: 182
+      },
+      useInPage: true,
+      root: getCurrentPages()
+    })
+    ctx.append(this.data.newList)
   },
 
-  onDisplay() {
-    this.setData({ show: true });
+  onPageScroll: function () {
   },
-  onClose() {
-    this.setData({ show: false });
+
+  onPullDownRefresh: function () {
   },
-  formatDate(date: any) {
-    date = new Date(date);
-    return `${date.getMonth() + 1}/${date.getDate()}`;
-  },
-  onConfirm(event: any) {
-    this.setData({
-      show: false,
-      date: this.formatDate(event.detail),
-    });
+
+  onReachBottom: function () {
   },
 
   // 事件处理函数
@@ -36,6 +47,9 @@ Page({
     wx.navigateTo({
       url: '../logs/logs',
     })
+  },
+  bindX(event: any) {
+    console.log(event)
   },
   bindA() {
     wx.navigateTo({
@@ -45,6 +59,11 @@ Page({
   bindB() {
     wx.navigateTo({
       url: '../landing/admin/landing',
+    })
+  },
+  bindCreate() {
+    wx.navigateTo({
+      url: '../apply/apply',
     })
   },
   bindUserLanding() {

@@ -2,11 +2,11 @@
   "name": "miniprogram",
   "version": "1.0.0",
   "description": "",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@vant/weapp": "^1.9.2"
+    "@vant/weapp": "^1.9.2",
+    "miniprogram-recycle-view": "^0.1.5"
   }
 }

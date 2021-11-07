@@ -37,8 +37,24 @@
   position: fixed;
 }
 
+.relative {
+  position: relative;
+}
+
 .absolute {
   position: absolute;
+}
+
+.my-4 {
+  margin: 4rpx 0;
+}
+
+.my-20 {
+  margin: 20rpx 0;
+}
+
+.mt-20 {
+  margin-top: 20rpx;
 }
 
 .my-20 {
@@ -46,6 +62,18 @@
   margin-bottom: 20rpx;
 }
 
+.pt-12 {
+  padding-top: 12rpx;
+}
+
 .w-auto {
-  width: auto;
+  width: auto !important;
+}
+
+.item-parent {
+  margin: -16px 0 0 -16px;
+}
+
+.item {
+  margin: 16rpx 16rpx 0 0 !important;
 }

@@ -14,6 +14,25 @@
   border-radius: 50%;
 }
 
-.usermotto {
-  margin-top: 80px;
+.card {
+  border: 2rpx solid #ffffff;
+  border-radius: 16rpx;
+  padding: 32rpx;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 20rpx;
+}
+
+.title {
+  font-size: 48rpx;
+}
+
+.label {
+  color: #969799;
+}
+
+.action-button {
+  height: 32px !important;
+  width: 32px !important;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

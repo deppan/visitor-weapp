@@ -6,3 +6,8 @@
   version "1.9.2"
   resolved "https://registry.npmmirror.com/@vant/weapp/download/@vant/weapp-1.9.2.tgz#406174c11d3f421dbbeff995a556ce1d30629908"
   integrity sha1-QGF0wR0/Qh277/mVpVbOHTBimQg=
+
+miniprogram-recycle-view@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.npm.taobao.org/miniprogram-recycle-view/download/miniprogram-recycle-view-0.1.5.tgz#854c2fe0df63c2165f739c8e0446aa35aa6c7d78"
+  integrity sha1-hUwv4N9jwhZfc5yOBEaqNapsfXg=

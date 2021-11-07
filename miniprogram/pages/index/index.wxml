@@ -1,5 +1,33 @@
-<view class="container">
-  <view class="userinfo">
+<view class="flex flex-col">
+  <van-collapse value="{{ activeNames }}" bind:change="onChange">
+    <van-collapse-item name="1" is-link="{{false}}">
+      提供多样店铺模板，快速搭建网上商城
+    </van-collapse-item>
+  </van-collapse>
+
+  <recycle-view batch="{{batchSetRecycleData}}" id="recycleId" style="margin-bottom: 120rpx;">
+    <recycle-item id="{{item.__index__}}" style="width: 100%" wx:for="{{recycleList}}" wx:key="id" bindtap="bindX">
+      <view class="card flex flex-col" >
+        <view class="flex items-center">
+          <text class="title">审核通过</text>
+          <icon class="icon-box-img" type="success" size="24" />
+        </view>
+
+        <text class="label my-4">2021-11-05</text>
+
+        <text class="label my-4">部门 - 教职工</text>
+
+        <text class="label my-4">申请原因</text>
+
+        <view class="flex mt-20" style="border-top-style:solid; border-top-color:#eeeeee; border-top-width: 1rpx; padding-left: -16rpx !important;">
+          <van-button round type="danger" size="mini" custom-class="w-auto item">删除</van-button>
+          <van-button round type="warning" size="mini" custom-class="w-auto item">撤消</van-button>
+        </view>
+      </view>
+    </recycle-item>
+  </recycle-view>
+
+  <!-- <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}">
       <view class="userinfo-avatar" bindtap="bindViewTap">
         <open-data type="userAvatarUrl"></open-data>
@@ -15,12 +43,33 @@
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
-  </view>
+  </view> -->
 
-  <van-button type="default" bind:click="bindA">创建</van-button>
+  <!-- <view class="card flex flex-col">
+    <view class="flex items-center">
+      <text class="title">审核通过</text>
+      <icon class="icon-box-img" type="success" size="24" />
+    </view>
+
+    <text class="label my-4">2021-11-05</text>
+
+    <text class="label my-4">部门 - 教职工</text>
+
+    <text class="label my-4">申请原因</text>
+
+    <view class="flex mt-20" style="border-top-style:solid; border-top-color:#eeeeee; border-top-width: 1rpx; padding-left: -16rpx !important;">
+      <van-button round type="danger" size="mini" custom-class="w-auto item">删除</van-button>
+      <van-button round type="warning" size="mini" custom-class="w-auto item">撤消</van-button>
+    </view>
+  </view> -->
+
+  <!-- <van-button type="default" bind:click="bindA">创建</van-button>
   <van-button type="primary" bind:click="bindB">管理员详情</van-button>
   <van-button type="info" bind:click="bindUserLanding">用户详情</van-button>
   <van-button type="warning" bind:click="bindPass">通过</van-button>
-  <van-button type="danger" bind:click="bindReject">驳回</van-button>
+  <van-button type="danger" bind:click="bindReject">驳回</van-button> -->
 
+  <view class="fixed" style="bottom: 0; right: 0; margin: 48rpx;">
+    <van-button round icon="plus" type="info" bind:click="bindCreate" custom-class="action-button"></van-button>
+  </view>
 </view>
