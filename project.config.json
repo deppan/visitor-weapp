@@ -1,19 +1,15 @@
 {
-  "description": "项目配置文件",
-  "packOptions": {
-    "ignore": []
-  },
-  "miniprogramRoot": "miniprogram/",
-  "compileType": "miniprogram",
-  "libVersion": "2.15.0",
+  "miniprogramRoot": "dist/",
   "projectname": "visitor",
+  "description": "",
+  "appid": "wxce75cf8caa4dc74d",
   "setting": {
     "urlCheck": true,
     "es6": true,
     "enhance": true,
-    "postcss": true,
+    "postcss": false,
     "preloadBackgroundData": false,
-    "minified": true,
+    "minified": false,
     "newFeature": false,
     "coverView": true,
     "nodeModules": false,
@@ -43,13 +39,8 @@
     "disableUseStrict": false,
     "minifyWXML": true,
     "showES6CompileOption": false,
-    "useCompilerPlugins": [
-      "typescript",
-      "sass"
-    ]
+    "useCompilerPlugins": false
   },
-  "simulatorType": "wechat",
-  "simulatorPluginLibVersion": {},
-  "appid": "wxd49973b72ca80c6a",
+  "compileType": "miniprogram",
   "condition": {}
 }

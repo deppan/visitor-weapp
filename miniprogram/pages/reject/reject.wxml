@@ -1,9 +1,0 @@
-<view>
-  <view class="flex flex-col items-center">
-    <icon class="icon-box-img" type="warn" size="93"></icon>
-  </view>
-  <van-cell-group>
-    <van-cell title="驳回原因" />
-    <van-cell label="{{ reason }}" border="{{ false }}" />
-  </van-cell-group>
-</view>
