@@ -3,7 +3,7 @@ export interface Registry {
   username: string
   identityCard: string
   mobile: string
-  visitTime: string
+  visitDate: string
   campus: string
   licensePlate: string
   healthCode: string

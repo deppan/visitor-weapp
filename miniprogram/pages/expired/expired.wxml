@@ -1,5 +1,7 @@
+<wxs src="../helper.wxs" module="helper" />
+
 <view class="flex flex-col items-center mt-64">
-  <icon class="icon-box-img" type="success" size="60" />
+  <icon class="icon-box-img" type="{{helper.stateIcon(registry.state)}}" size="60" color="{{helper.iconColor(registry.state)}}" />
 
   <text class="mt-32">申请已过期</text>
 

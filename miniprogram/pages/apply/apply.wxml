@@ -9,11 +9,11 @@
     <van-field value="{{ visitTime }}" required is-link readonly label="到访时间" placeholder="点击选择到访时间" bind:click-input="showPopup" />
 
     <van-field id="health_code" required label="健康码">
-      <van-uploader slot="input" file-list="{{healthCode}}" deletable="{{ true }}" max-count="1" max-size="500*1024" />
+      <van-uploader slot="input" name="healthCode" file-list="{{ healthCode }}" bind:oversize="oversize" bind:delete="delete" bind:after-read="afterRead" deletable="{{ true }}" max-count="1" max-size="{{2000 * 1024}}" />
     </van-field>
 
     <van-field id="trip_code" required label="行程码">
-      <van-uploader slot="input" file-list="{{tripCode}}" deletable="{{ true }}" max-count="1" max-size="500*1024" />
+      <van-uploader slot="input" name="tripCode" file-list="{{tripCode}}" bind:oversize="oversize" bind:delete="delete" bind:after-read="afterRead" deletable="{{ true }}" max-count="1" max-size="{{2000 * 1024}}" />
     </van-field>
 
     <van-field id="license_plate" clearable value="{{ licensePlate }}" label="车牌号码" placeholder="请输入车牌号码" bind:change="onTextChange" />

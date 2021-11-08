@@ -1,17 +1,19 @@
+<wxs src="../helper.wxs" module="helper" />
+
 <view class="flex flex-col">
   <recycle-view batch="{{batchSetRecycleData}}" id="recycleId" style="margin-bottom: 150rpx;">
     <recycle-item id="{{item.__index__}}" style="width: 100%" wx:for="{{recycleList}}" wx:key="id" bindtap="bindItemClick">
       <view class="card flex flex-col">
         <view class="flex items-center">
-          <text class="text-gray-700">审核通过</text>
-          <icon class="icon-box-img" type="success" size="24" />
+          <text class="text-gray-700">{{helper.stateValue(item.state)}}</text>
+          <icon class="icon-box-img ml-8" type="{{helper.stateIcon(item.state)}}" size="18" color="{{helper.iconColor(item.state)}}" />
         </view>
 
-        <text class="text-gray-500 my-4">2021-11-05</text>
+        <text class="text-gray-500 text-sm my-4">{{item.visitDate}}</text>
 
-        <text class="text-gray-500 my-4">部门 - 教职工</text>
+        <text class="text-gray-500 text-sm my-4">{{item.department}} - {{item.manager}}</text>
 
-        <text class="text-gray-500 my-4">申请原因</text>
+        <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark}}</view>
       </view>
     </recycle-item>
   </recycle-view>

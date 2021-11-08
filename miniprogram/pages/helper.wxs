@@ -1,0 +1,45 @@
+var stateValue = function (state) {
+  if (state == 1) {
+    return '审核中'
+  } else if (state == 21) {
+    return '审核通过, 未到进入时间'
+  } else if (state == 22) {
+    return '审核通过, 允许进入'
+  } else if (state == 23) {
+    return '允许通行'
+  } else if (state == 3) {
+    return '驳回'
+  } else {
+    return '已过期'
+  }
+}
+
+var stateIcon = function (state) {
+  if (state == 1) {
+    return 'waiting'
+  } else if (state == 21) {
+    return 'info_circle'
+  } else if (state == 22) {
+    return 'info'
+  } else if (state == 23) {
+    return 'success'
+  } else if (state == 3) {
+    return 'warn'
+  } else {
+    return 'warn'
+  }
+}
+
+var iconColor = function (state) {
+  if (state == 4) {
+    return '#C9C9C9'
+  } else {
+    return ''
+  }
+}
+
+module.exports = {
+  stateValue: stateValue,
+  stateIcon: stateIcon,
+  iconColor: iconColor
+}

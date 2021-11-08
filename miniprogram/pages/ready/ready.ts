@@ -13,8 +13,10 @@ Page({
    */
   onLoad(options: any) {
     let json = options.json
-    this.data.json = json
-    this.data.registry = JSON.parse(json)
+    this.setData({
+      registry: JSON.parse(json),
+      json:json
+    })
   },
 
   landing() {

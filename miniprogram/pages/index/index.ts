@@ -1,92 +1,108 @@
 // index.ts
 // 获取应用实例
-import createRecycleContext from 'miniprogram-recycle-view';
+import createRecycleContext from 'miniprogram-recycle-view'
 
 Page({
   data: {
     userInfo: {},
-    newList: [{
-      id: 1,
-      username: '张三',
-      mobile: '111',
-      campus: '天津科技大学',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      state: 1,
-      licensePlate: '',
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀',
-    },
-    {
-      id: 2,
-      username: '李四',
-      mobile: '111',
-      campus: '天津科技大学',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      licensePlate: '',
-      state: 21,
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀'
-    },
-    {
-      id: 3,
-      username: '王二',
-      mobile: '111',
-      campus: '天津科技大学',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      licensePlate: '',
-      state: 22,
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀'
-    },
-    {
-      id: 4,
-      username: '麻子',
-      mobile: '111',
-      campus: '天津科技大学',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      licensePlate: '',
-      state: 23,
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀'
-    },
-    {
-      id: 5,
-      username: 'abc',
-      mobile: '111',
-      campus: 'A',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      licensePlate: '',
-      state: 3,
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀'
-    },
-    {
-      id: 6,
-      username: 'abc',
-      mobile: '111',
-      campus: '天津科技大学',
-      identityCard: '1234234',
-      visitTime: '2021-11-07',
-      licensePlate: '',
-      state: 4,
-      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-      remark: '备注呀'
-    }],
+    newList: [
+      {
+        id: 1,
+        username: '张三',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        state: 1,
+        licensePlate: '',
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
+      },
+      {
+        id: 2,
+        username: '李四',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 21,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
+      },
+      {
+        id: 3,
+        username: '王二',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 22,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
+      },
+      {
+        id: 4,
+        username: '麻子',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 23,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
+      },
+      {
+        id: 5,
+        username: 'abc',
+        mobile: '111',
+        campus: 'A',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 3,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀'
+      },
+      {
+        id: 6,
+        username: 'abc',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 4,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
+      }
+    ],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
-    canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
+    canIUseOpenData:
+      wx.canIUse('open-data.type.userAvatarUrl') &&
+      wx.canIUse('open-data.type.userNickName') // 如需尝试获取用户信息可改为false
   },
 
   onReady: function () {
@@ -96,7 +112,7 @@ Page({
       page: this,
       itemSize: {
         width: 162,
-        height: 140
+        height: 132
       },
       useInPage: true,
       root: getCurrentPages()
@@ -104,19 +120,16 @@ Page({
     ctx.append(this.data.newList)
   },
 
-  onPageScroll: function () {
-  },
+  onPageScroll: function () { },
 
-  onPullDownRefresh: function () {
-  },
+  onPullDownRefresh: function () { },
 
-  onReachBottom: function () {
-  },
+  onReachBottom: function () { },
 
   // 事件处理函数
   bindViewTap() {
     wx.navigateTo({
-      url: '../logs/logs',
+      url: '../logs/logs'
     })
   },
 
@@ -164,7 +177,7 @@ Page({
 
   bindCreate() {
     wx.navigateTo({
-      url: '../apply/apply',
+      url: '../apply/apply'
     })
   },
 
