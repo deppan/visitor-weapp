@@ -4,28 +4,99 @@ import createRecycleContext from 'miniprogram-recycle-view';
 
 Page({
   data: {
-    activeNames: ['1'],
     userInfo: {},
-    newList: [{ id: 1, title: "1", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 2, title: "2", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 3, title: "3", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 4, title: "4", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }, { id: 5, title: "5", image_url: "https://img.yzcdn.cn/vant/cat.jpeg" }],
+    newList: [{
+      id: 1,
+      username: '张三',
+      mobile: '111',
+      campus: '天津科技大学',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      state: 1,
+      licensePlate: '',
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀',
+    },
+    {
+      id: 2,
+      username: '李四',
+      mobile: '111',
+      campus: '天津科技大学',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      licensePlate: '',
+      state: 21,
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀'
+    },
+    {
+      id: 3,
+      username: '王二',
+      mobile: '111',
+      campus: '天津科技大学',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      licensePlate: '',
+      state: 22,
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀'
+    },
+    {
+      id: 4,
+      username: '麻子',
+      mobile: '111',
+      campus: '天津科技大学',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      licensePlate: '',
+      state: 23,
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀'
+    },
+    {
+      id: 5,
+      username: 'abc',
+      mobile: '111',
+      campus: 'A',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      licensePlate: '',
+      state: 3,
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀'
+    },
+    {
+      id: 6,
+      username: 'abc',
+      mobile: '111',
+      campus: '天津科技大学',
+      identityCard: '1234234',
+      visitTime: '2021-11-07',
+      licensePlate: '',
+      state: 4,
+      healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+      tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+      remark: '备注呀'
+    }],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
     canIUseOpenData: wx.canIUse('open-data.type.userAvatarUrl') && wx.canIUse('open-data.type.userNickName'), // 如需尝试获取用户信息可改为false
   },
-  onChange(event: any) {
-    console.log(event.detail)
-    this.setData({
-      activeNames: event.detail,
-    });
-  },
+
   onReady: function () {
-    var ctx = createRecycleContext({
+    let ctx = createRecycleContext({
       id: 'recycleId',
       dataKey: 'recycleList',
       page: this,
       itemSize: {
         width: 162,
-        height: 182
+        height: 140
       },
       useInPage: true,
       root: getCurrentPages()
@@ -48,39 +119,55 @@ Page({
       url: '../logs/logs',
     })
   },
-  bindX(event: any) {
-    console.log(event)
+
+  bindItemClick(event: any) {
+    let index = event.currentTarget.id
+    let registry = this.data.newList[index]
+    const events = {
+      stateChange: function (newState: number) {
+        registry.state = newState
+      }
+    }
+    let json = JSON.stringify(registry)
+    if (registry.state == 1) {
+      wx.navigateTo({
+        url: '../queue/queue?json=' + json,
+        events: events
+      })
+    } else if (registry.state == 21) {
+      wx.navigateTo({
+        url: '../wait/wait?json=' + json,
+        events: events
+      })
+    } else if (registry.state == 22) {
+      wx.navigateTo({
+        url: '../ready/ready?json=' + json,
+        events: events
+      })
+    } else if (registry.state == 23) {
+      wx.navigateTo({
+        url: '../pass/pass?json=' + json,
+        events: events
+      })
+    } else if (registry.state == 3) {
+      wx.navigateTo({
+        url: '../reject/reject?json=' + json,
+        events: events
+      })
+    } else if (registry.state == 4) {
+      wx.navigateTo({
+        url: '../expired/expired?json=' + json,
+        events: events
+      })
+    }
   },
-  bindA() {
-    wx.navigateTo({
-      url: '../apply/apply',
-    })
-  },
-  bindB() {
-    wx.navigateTo({
-      url: '../landing/admin/landing',
-    })
-  },
+
   bindCreate() {
     wx.navigateTo({
       url: '../apply/apply',
     })
   },
-  bindUserLanding() {
-    wx.navigateTo({
-      url: '../landing/user/landing',
-    })
-  },
-  bindReject() {
-    wx.navigateTo({
-      url: '../reject/reject',
-    })
-  },
-  bindPass() {
-    wx.navigateTo({
-      url: '../pass/pass',
-    })
-  },
+
   onLoad() {
     // @ts-ignore
     if (wx.getUserProfile) {
@@ -89,6 +176,7 @@ Page({
       })
     }
   },
+
   getUserProfile() {
     // 推荐使用wx.getUserProfile获取用户信息，开发者每次通过该接口获取用户个人信息均需用户确认，开发者妥善保管用户快速填写的头像昵称，避免重复弹窗
     wx.getUserProfile({
@@ -102,6 +190,7 @@ Page({
       }
     })
   },
+
   getUserInfo(e: any) {
     // 不推荐使用getUserInfo获取用户信息，预计自2021年4月13日起，getUserInfo将不再弹出弹窗，并直接返回匿名的用户个人信息
     console.log(e)

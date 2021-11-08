@@ -13,6 +13,10 @@
   bottom: 0px;
 }
 
+.right-0 {
+  right: 0;
+}
+
 .flex {
   display: flex;
 }
@@ -53,8 +57,24 @@
   margin: 20rpx 0;
 }
 
+.mt-8 {
+  margin-top: 8rpx;
+}
+
 .mt-20 {
   margin-top: 20rpx;
+}
+
+.mt-32 {
+  margin-top: 32rpx;
+}
+
+.mt-48 {
+  margin-top: 48rpx;
+}
+
+.mt-64 {
+  margin-top: 64rpx;
 }
 
 .my-20 {
@@ -62,18 +82,60 @@
   margin-bottom: 20rpx;
 }
 
+.mb-20 {
+  margin-bottom: 20rpx;
+}
+
+.mb-40 {
+  margin-bottom: 40rpx;
+}
+
 .pt-12 {
   padding-top: 12rpx;
 }
 
-.w-auto {
-  width: auto !important;
+.text-gray-50 {
+  color: rgb(247, 248, 250);
 }
 
-.item-parent {
-  margin: -16px 0 0 -16px;
+.text-gray-100 {
+  color: rgb(242, 243, 245);
 }
 
-.item {
-  margin: 16rpx 16rpx 0 0 !important;
+.text-gray-200 {
+  color: rgb(235, 237, 240);
+}
+
+.text-gray-300 {
+  color: rgb(220, 222, 224);
+}
+
+.text-gray-400 {
+  color: rgb(200, 201, 204);
+}
+
+.text-gray-500 {
+  color: rgb(150, 151, 153);
+}
+
+.text-gray-600 {
+  color: rgb(100, 101, 102);
+}
+
+.text-gray-700 {
+  color: rgb(50, 50, 51);
+}
+
+.text-xs {
+  font-size: 12px;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.van-button--info {
+  background: var(--button-info-background-color, #1989fa);
+  border: var(--button-border-width, 1px) solid var(--button-info-border-color, #1989fa) !important;
+  color: var(--button-info-color, #fff);
 }

@@ -1,6 +1,3 @@
 {
-  "navigationBarTitleText": "审核未通过",
-  "usingComponents": {
-    "van-field": "@vant/weapp/field/index"
-  }
+  "usingComponents": {}
 }

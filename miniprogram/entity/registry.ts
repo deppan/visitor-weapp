@@ -9,4 +9,5 @@ export interface Registry {
   healthCode: string
   tripCode: string
   remark: string
+  state: number
 }

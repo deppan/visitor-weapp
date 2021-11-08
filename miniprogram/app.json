@@ -3,10 +3,13 @@
     "pages/index/index",
     "pages/apply/apply",
     "pages/logs/logs",
-    "pages/landing/admin/landing",
-    "pages/landing/user/landing",
+    "pages/landing/landing",
+    "pages/queue/queue",
+    "pages/wait/wait",
+    "pages/ready/ready",
+    "pages/pass/pass",
     "pages/reject/reject",
-    "pages/pass/pass"
+    "pages/expired/expired"
   ],
   "window": {
     "backgroundTextStyle": "light",
