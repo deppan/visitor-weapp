@@ -9,6 +9,8 @@ var stateValue = function (state) {
     return '允许通行'
   } else if (state == 3) {
     return '驳回'
+  } else if (state == 4) {
+    return '取消'
   } else {
     return '已过期'
   }
@@ -25,6 +27,8 @@ var stateIcon = function (state) {
     return 'success'
   } else if (state == 3) {
     return 'warn'
+  } else if (state == 4) {
+    return 'info'
   } else {
     return 'warn'
   }
@@ -32,6 +36,8 @@ var stateIcon = function (state) {
 
 var iconColor = function (state) {
   if (state == 4) {
+    return '#faad14'
+  } else if (state == 5) {
     return '#C9C9C9'
   } else {
     return ''

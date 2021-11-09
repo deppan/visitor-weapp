@@ -8,9 +8,9 @@
   "libVersion": "2.15.0",
   "projectname": "visitor",
   "setting": {
-    "urlCheck": true,
-    "es6": true,
-    "enhance": true,
+    "urlCheck": false,
+    "es6": false,
+    "enhance": false,
     "postcss": true,
     "preloadBackgroundData": false,
     "minified": true,
@@ -50,6 +50,6 @@
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "appid": "wxd49973b72ca80c6a",
+  "appid": "wx99fb7355019bf9af",
   "condition": {}
 }

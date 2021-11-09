@@ -94,8 +94,8 @@ Page({
     } catch (e: any) {
       console.log(e)
     }
-    // wx.redirectTo({
-    //   url: '../landing/user/landing'
-    // })
+    wx.redirectTo({
+      url: '../queue/queue'
+    })
   }
 })

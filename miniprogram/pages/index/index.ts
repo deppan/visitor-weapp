@@ -95,6 +95,21 @@ Page({
         healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
         tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
         remark: '备注呀'
+      },
+      {
+        id: 7,
+        username: 'abc',
+        mobile: '111',
+        campus: '天津科技大学',
+        identityCard: '1234234',
+        department: '保卫处',
+        manager: '刘主任',
+        visitDate: '2021-11-07',
+        licensePlate: '',
+        state: 5,
+        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
+        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
+        remark: '备注呀'
       }
     ],
     hasUserInfo: false,
