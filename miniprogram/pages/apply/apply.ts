@@ -1,3 +1,5 @@
+import FormData from '../../wx-formdata/formData'
+
 Page({
   data: {
     username: '',
@@ -57,6 +59,7 @@ Page({
 
   afterRead(event: any) {
     const { file, name } = event.detail
+    console.log(file)
     if (name == "healthCode") {
       this.setData({ healthCode: this.data.healthCode.concat(file) })
     } else if (name == "tripCode") {
@@ -69,8 +72,30 @@ Page({
   },
 
   onSubmit() {
-    wx.redirectTo({
-      url: '../landing/user/landing'
-    })
+    try {
+      let formData = new FormData();
+      // @ts-ignore
+      formData.appendFile('health_code', this.data.healthCode[0].url)
+      let data = formData.getData()
+      wx.request({
+        url: 'http://192.168.2.217:9999/v1/registry',
+        data: data.buffer,
+        method: 'POST',
+        header: {
+          'content-type': data.contentType
+        },
+        success: (res: any) => {
+          console.log(res)
+        },
+        fail: (res: any) => {
+          console.log(res)
+        }
+      })
+    } catch (e: any) {
+      console.log(e)
+    }
+    // wx.redirectTo({
+    //   url: '../landing/user/landing'
+    // })
   }
 })
