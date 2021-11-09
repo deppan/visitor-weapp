@@ -1,0 +1,9 @@
+<view class="flex flex-col items-center mt-64">
+  <icon class="icon-box-img" type="success" size="60" />
+
+  <text class="mt-32">您已取消申请</text>
+
+  <van-button plain hairline custom-class="mt-48" type="info" bind:click="landing">
+    查看详情
+  </van-button>
+</view>

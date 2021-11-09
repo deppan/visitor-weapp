@@ -149,7 +149,7 @@ Page({
       })
     } else if (registry.state == 21) {
       wx.navigateTo({
-        url: '../wait/wait?json=' + json,
+        url: '../await/await?json=' + json,
         events: events
       })
     } else if (registry.state == 22) {

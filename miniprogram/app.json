@@ -5,10 +5,11 @@
     "pages/logs/logs",
     "pages/landing/landing",
     "pages/queue/queue",
-    "pages/wait/wait",
+    "pages/await/await",
     "pages/ready/ready",
     "pages/pass/pass",
     "pages/reject/reject",
+    "pages/cancelled/cancelled",
     "pages/expired/expired"
   ],
   "window": {
