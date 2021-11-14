@@ -1,4 +1,5 @@
 import FormData from '../../wx-formdata/formData'
+const app = getApp()
 
 Page({
   data: {
@@ -6,7 +7,9 @@ Page({
     mobile: '',
     identityCard: '',
     visitTime: '',
-    campus: '',
+    campusId: '1',
+    departmentId: '1',
+    staffId: '1',
     licensePlate: '',
     healthCode: [],
     tripCode: [],
@@ -59,7 +62,6 @@ Page({
 
   afterRead(event: any) {
     const { file, name } = event.detail
-    console.log(file)
     if (name == "healthCode") {
       this.setData({ healthCode: this.data.healthCode.concat(file) })
     } else if (name == "tripCode") {
@@ -74,17 +76,36 @@ Page({
   onSubmit() {
     try {
       let formData = new FormData();
+      formData.append('username', this.data.username)
+      formData.append('mobile', this.data.mobile)
+      formData.append('identity_card', this.data.identityCard)
+      formData.append('visit_time', this.data.visitTime)
+      formData.append('campus_id', this.data.campusId)
+      formData.append('department_id', this.data.departmentId)
+      formData.append('staff_id', this.data.staffId)
+      formData.append('license_plate', this.data.licensePlate)
+      formData.append('remark', this.data.remark)
       // @ts-ignore
       formData.appendFile('health_code', this.data.healthCode[0].url)
+      // @ts-ignore
+      formData.appendFile('trip_code', this.data.tripCode[0].url)
       let data = formData.getData()
       wx.request({
-        url: 'http://192.168.2.217:9999/v1/registry',
+        url: 'http://192.168.0.100:8888/v1/registry',
         data: data.buffer,
         method: 'POST',
         header: {
-          'content-type': data.contentType
+          'content-type': data.contentType,
+          'token': app.token
         },
         success: (res: any) => {
+          if (res.statusCode == 200) {
+            let json = JSON.stringify(res.data)
+            wx.redirectTo({
+              url: '../queue/queue?json=' + json
+            })
+          }
+
           console.log(res)
         },
         fail: (res: any) => {
@@ -94,8 +115,5 @@ Page({
     } catch (e: any) {
       console.log(e)
     }
-    wx.redirectTo({
-      url: '../queue/queue'
-    })
   }
 })

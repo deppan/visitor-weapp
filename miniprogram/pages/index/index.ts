@@ -1,117 +1,11 @@
 // index.ts
-// 获取应用实例
 import createRecycleContext from 'miniprogram-recycle-view'
+const app = getApp()
+var ctx: any = null
 
 Page({
   data: {
     userInfo: {},
-    newList: [
-      {
-        id: 1,
-        username: '张三',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        state: 1,
-        licensePlate: '',
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      },
-      {
-        id: 2,
-        username: '李四',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 21,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      },
-      {
-        id: 3,
-        username: '王二',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 22,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      },
-      {
-        id: 4,
-        username: '麻子',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 23,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      },
-      {
-        id: 5,
-        username: 'abc',
-        mobile: '111',
-        campus: 'A',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 3,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀备注呀'
-      },
-      {
-        id: 6,
-        username: 'abc',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 4,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      },
-      {
-        id: 7,
-        username: 'abc',
-        mobile: '111',
-        campus: '天津科技大学',
-        identityCard: '1234234',
-        department: '保卫处',
-        manager: '刘主任',
-        visitDate: '2021-11-07',
-        licensePlate: '',
-        state: 5,
-        healthCode: 'https://img.yzcdn.cn/vant/cat.jpeg',
-        tripCode: 'https://storage.360buyimg.com/mtd/home/111543234387022.jpg',
-        remark: '备注呀'
-      }
-    ],
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -121,7 +15,7 @@ Page({
   },
 
   onReady: function () {
-    let ctx = createRecycleContext({
+    ctx = createRecycleContext({
       id: 'recycleId',
       dataKey: 'recycleList',
       page: this,
@@ -132,12 +26,19 @@ Page({
       useInPage: true,
       root: getCurrentPages()
     })
-    ctx.append(this.data.newList)
+
+    wx.login({
+      success: res => {
+        this.register(res.code)
+      },
+    })
   },
 
   onPageScroll: function () { },
 
-  onPullDownRefresh: function () { },
+  onPullDownRefresh: function () {
+    this.list(true)
+  },
 
   onReachBottom: function () { },
 
@@ -150,7 +51,7 @@ Page({
 
   bindItemClick(event: any) {
     let index = event.currentTarget.id
-    let registry = this.data.newList[index]
+    let registry = ctx.getList()[index]
     const events = {
       stateChange: function (newState: number) {
         registry.state = newState
@@ -188,6 +89,55 @@ Page({
         events: events
       })
     }
+  },
+
+  showLoading() {
+    wx.showLoading({
+      title: '',
+    })
+  },
+  hideLoading() {
+    wx.hideLoading()
+    wx.stopPullDownRefresh()
+  },
+
+  register(code: string) {
+    const that = this
+    this.showLoading()
+    wx.request({
+      url: 'http://192.168.0.100:8888/v1/authorize?code=' + code,
+      success(res: any) {
+        app.token = res.data.data
+        that.list(true)
+      },
+      fail(err: any) {
+        that.hideLoading()
+        console.log(err)
+      }
+    })
+  },
+
+  list(refresh: boolean) {
+    let that = this
+    wx.request({
+      url: 'http://192.168.0.100:8888/v1/registries',
+      header: {
+        'token': app.token
+      },
+      success: (res: any) => {
+        if (res.statusCode == 200) {
+          if (refresh) {
+            ctx.splice(0, ctx.getList().length, res.data.data)
+          } else {
+            ctx.append(res.data.data)
+          }
+        }
+        that.hideLoading()
+      },
+      fail: () => {
+        that.hideLoading()
+      }
+    })
   },
 
   bindCreate() {
