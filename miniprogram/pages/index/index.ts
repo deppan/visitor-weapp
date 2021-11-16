@@ -6,6 +6,7 @@ var ctx: any = null
 Page({
   data: {
     userInfo: {},
+    width: wx.getSystemInfoSync().windowWidth,
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     canIUseGetUserProfile: false,
@@ -20,8 +21,8 @@ Page({
       dataKey: 'recycleList',
       page: this,
       itemSize: {
-        width: 162,
-        height: 132
+        width: wx.getSystemInfoSync().windowWidth,
+        height: 120
       },
       useInPage: true,
       root: getCurrentPages()

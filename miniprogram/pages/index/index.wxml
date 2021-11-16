@@ -2,18 +2,20 @@
 
 <view class="flex flex-col">
   <recycle-view batch="{{batchSetRecycleData}}" id="recycleId" style="margin-bottom: 150rpx;">
-    <recycle-item id="{{item.__index__}}" style="width: 100%" wx:for="{{recycleList}}" wx:key="id" bindtap="bindItemClick">
-      <view class="card flex flex-col">
-        <view class="flex items-center">
-          <text class="text-gray-700">{{helper.stateValue(item.state)}}</text>
-          <icon class="icon-box-img ml-8" type="{{helper.stateIcon(item.state)}}" size="18" color="{{helper.iconColor(item.state)}}" />
+    <recycle-item id="{{item.__index__}}" style="width:{{width}}px; height:120px;" wx:for="{{recycleList}}" wx:key="id" bindtap="bindItemClick">
+      <view style="height: 100%;">
+        <view class="card">
+          <view class="flex items-center">
+            <text class="text-gray-700">{{helper.stateValue(item.state)}}</text>
+            <icon class="icon-box-img ml-8" type="{{helper.stateIcon(item.state)}}" size="18" color="{{helper.iconColor(item.state)}}" />
+          </view>
+
+          <text class="text-gray-500 text-sm my-4">{{item.visitDate}}</text>
+
+          <text class="text-gray-500 text-sm my-4">{{item.department}} - {{item.staff}}</text>
+
+          <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark}}</view>
         </view>
-
-        <text class="text-gray-500 text-sm my-4">{{item.visitDate}}</text>
-
-        <text class="text-gray-500 text-sm my-4">{{item.department}} - {{item.staff}}</text>
-
-        <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark}}</view>
       </view>
     </recycle-item>
   </recycle-view>
@@ -60,7 +62,7 @@
   <van-button type="warning" bind:click="bindPass">通过</van-button>
   <van-button type="danger" bind:click="bindReject">驳回</van-button> -->
 
-  <view class="fixed bottom-0 right-0" style="margin: 48rpx;">
+  <view class="fixed bottom-0 right-0" style="margin: 24px;">
     <van-button round icon="plus" type="info" bind:click="bindCreate" custom-class="action-button" />
   </view>
 </view>
