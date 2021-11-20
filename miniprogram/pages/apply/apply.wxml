@@ -1,4 +1,4 @@
-<view class="flex;flex-col">
+<view class="flex;flex-col" hidden="{{loading}}">
   <van-cell-group>
     <van-field id="username" clearable value="{{ username }}" required label="姓名" placeholder="请输入姓名" bind:change="onTextChange" />
 
@@ -7,6 +7,10 @@
     <van-field id="identity_card" clearable value="{{ identityCard }}" required label="身份证号" placeholder="请输入身份证号" bind:change="onTextChange" />
 
     <van-field value="{{ visitTime }}" required is-link readonly label="到访时间" placeholder="点击选择到访时间" bind:click-input="showPopup" />
+
+    <van-field value="{{ campus }}" required is-link readonly label="校区" placeholder="点击选择校区" bind:click-input="showCampus" />
+
+    <van-field value="{{ staff }}" required is-link readonly label="教工" disabled="{{campus.length==0}}" placeholder="点击选择教工" bind:click-input="showStaff" />
 
     <van-field id="health_code" required label="健康码">
       <van-uploader slot="input" name="healthCode" file-list="{{ healthCode }}" bind:oversize="oversize" bind:delete="delete" bind:after-read="afterRead" deletable="{{ true }}" max-count="1" max-size="{{2000 * 1024}}" />
@@ -22,6 +26,14 @@
   </van-cell-group>
 
   <van-calendar type="single" position="bottom" show="{{ showVisitPicker }}" bind:close="onClose" bind:confirm="onConfirm" />
+
+  <van-popup show="{{ campusPicker }}" round position="bottom">
+    <van-picker show-toolbar columns="{{ campuses }}" bind:confirm="onCampusConfirm" bind:cancel="onClose" value-key="name" />
+  </van-popup>
+
+  <van-popup show="{{ staffPicker }}" round position="bottom">
+    <van-picker show-toolbar columns="{{ departments }}" bind:change="onStaffChange" bind:confirm="onStaffConfirm" bind:cancel="onClose" value-key="name" />
+  </van-popup>
 
   <van-button type="primary" style="margin: 20rpx 0;" class="flex" bind:click="onSubmit">提交</van-button>
 </view>

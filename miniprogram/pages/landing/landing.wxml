@@ -1,13 +1,15 @@
 <van-cell-group>
-  <van-cell title="姓名" value="内容" />
+  <van-cell title="姓名" value="{{registry.username || ''}}" />
 
-  <van-cell title="电话号码" value="内容" />
+  <van-cell title="电话号码" value="{{registry.mobile || ''}}" />
 
-  <van-cell title="身份证号" value="内容" />
+  <van-cell title="身份证号" value="{{registry.identity_card || ''}}" />
 
-  <van-cell title="部门" value="内容" />
+  <van-cell title="访问时间" value="{{registry.visit_time || ''}}" />
 
-  <van-cell title="教工" value="内容" />
+  <van-cell title="部门" value="{{registry.department || ''}}" />
+
+  <van-cell title="教工" value="{{registry.staff || ''}}" />
 
   <view style="display: flex; flex-direction: column; ">
     <van-cell title="健康码" border="{{ false }}" />
@@ -19,7 +21,7 @@
     <van-image width="100%" height="auto" fit="widthFix" src="https://img.yzcdn.cn/vant/cat.jpeg" style="margin: 0 var(--cell-horizontal-padding,16px);" bind:click="preview" />
   </view>
 
-  <van-cell title="车牌号码" value="内容" />
+  <van-cell title="车牌号码" value="{{registry.license_plate || ''}}" />
 
-  <van-cell title="备注" value="内容" border="{{ false }}" custom-class="mb-40" />
+  <van-cell title="备注" value="{{registry.remark || ''}}" border="{{ false }}" custom-class="mb-40" />
 </van-cell-group>

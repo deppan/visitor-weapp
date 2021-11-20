@@ -1,24 +1,151 @@
 import FormData from '../../wx-formdata/formData'
+import { url } from '../../utils/util'
+
 const app = getApp()
 
 Page({
   data: {
+    loading: true,
+    campusPicker: false,
+    staffPicker: false,
     username: '',
     mobile: '',
     identityCard: '',
     visitTime: '',
-    campusId: '1',
-    departmentId: '1',
-    staffId: '1',
     licensePlate: '',
     healthCode: [],
     tripCode: [],
+    campusId: 0,
+    campus: '',
+    campuses: [],
+    staffId: '',
+    staff: '',
+    staffMap: new Map(),
+    departments: [{
+      values: [],
+      className: 'column1',
+    },
+    {
+      values: [],
+      className: 'column2',
+    },
+    {
+      values: [],
+      className: 'column3',
+    }],
     remark: ''
+  },
+
+  onReady: function () {
+    let that = this
+    this.showLoading()
+    wx.request({
+      url: url + '/v1/campuses',
+      method: 'GET',
+      header: {
+        'token': app.token
+      },
+      success: (res: any) => {
+        that.data.staffMap = new Map()
+        if (res.statusCode == 200) {
+          const campuses = res.data.data.campuses
+          const departments = res.data.data.departments
+          if (campuses != null) {
+            for (const campus of campuses) {
+              const staffs = campus.staffs;
+              if (staffs != null) {
+                for (const staff of staffs) {
+                  const key = campus.id + "_" + staff.department_code
+                  if (!that.data.staffMap.has(key)) {
+                    const array = new Array()
+                    array.push(staff)
+                    that.data.staffMap.set(key, array);
+                  } else {
+                    that.data.staffMap.get(key).push(staff)
+                  }
+                }
+              }
+            }
+            that.setData({
+              campuses: campuses,
+              departments: [{
+                values: departments,
+                className: 'column1',
+              },
+              {
+                values: departments[0].children || [],
+                className: 'column2',
+              },
+              {
+                values: that.data.staffMap.get(campuses[0].id + '_' + departments[0].children[0].code) || [],
+                className: 'column3',
+              }]
+            })
+          }
+        }
+        that.setData({ loading: false })
+        that.hideLoading()
+      },
+      fail: (res: any) => {
+        that.hideLoading()
+        wx.navigateBack()
+      }
+    })
+  },
+
+  showLoading() {
+    wx.showLoading({
+      title: '加载资源中...',
+    })
+  },
+
+  hideLoading() {
+    wx.hideLoading()
   },
 
   formatDate(date: number | string | Date) {
     date = new Date(date)
     return `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`
+  },
+
+  onCampusConfirm(event: any) {
+    console.log(event)
+    let name = event.detail.value.name
+    if (name != null && name != this.data.campus) {
+      this.setData({
+        campusId: event.detail.value.id,
+        campus: event.detail.value.name,
+        staff: '',
+        staffId: '',
+      })
+    }
+
+    this.onClose()
+  },
+
+  onStaffChange(event: any) {
+    const { picker, value, index } = event.detail;
+    if (index == 0) {
+      const children = value[0].children || []
+      picker.setColumnValues(1, children);
+      if (children.length > 0) {
+        picker.setColumnValues(2, this.data.staffMap.get(this.data.campusId + '_' + children[0].code) || [])
+      }
+    } else if (index == 1) {
+      const key = this.data.campusId + '_' + value[1].code
+      picker.setColumnValues(2, this.data.staffMap.get(key) || [])
+    }
+  },
+
+  onStaffConfirm(event: any) {
+    const value = event.detail.value[2]
+    if (value != null) {
+      this.setData({
+        staffId: value.id,
+        staff: value.name
+      })
+    }
+    this.onClose()
   },
 
   onTextChange(event: any) {
@@ -36,8 +163,29 @@ Page({
     this.setData({ showVisitPicker: true })
   },
 
+  showCampus() {
+    this.setData({ campusPicker: true })
+  },
+
+  showStaff() {
+    if (this.data.campusId == 0) {
+      wx.showToast({
+        title: '请先选择校区',
+        icon: 'error',
+        duration: 2000
+      })
+
+      return
+    }
+    this.setData({ staffPicker: true })
+  },
+
   onClose() {
-    this.setData({ showVisitPicker: false })
+    this.setData({
+      showVisitPicker: false,
+      campusPicker: false,
+      staffPicker: false
+    })
   },
 
   onConfirm(event: any) {
@@ -80,8 +228,6 @@ Page({
       formData.append('mobile', this.data.mobile)
       formData.append('identity_card', this.data.identityCard)
       formData.append('visit_time', this.data.visitTime)
-      formData.append('campus_id', this.data.campusId)
-      formData.append('department_id', this.data.departmentId)
       formData.append('staff_id', this.data.staffId)
       formData.append('license_plate', this.data.licensePlate)
       formData.append('remark', this.data.remark)
@@ -91,7 +237,7 @@ Page({
       formData.appendFile('trip_code', this.data.tripCode[0].url)
       let data = formData.getData()
       wx.request({
-        url: 'http://192.168.0.100:8888/v1/registry',
+        url: url + '/v1/registry',
         data: data.buffer,
         method: 'POST',
         header: {

@@ -1,5 +1,7 @@
 // index.ts
 import createRecycleContext from 'miniprogram-recycle-view'
+import { url } from '../../utils/util'
+
 const app = getApp()
 var ctx: any = null
 
@@ -54,8 +56,9 @@ Page({
     let index = event.currentTarget.id
     let registry = ctx.getList()[index]
     const events = {
-      stateChange: function (newState: number) {
-        registry.state = newState
+      stateChange: function (res: any) {
+        registry.state = res.newState
+        ctx.update(index, 1, registry)
       }
     }
     let json = JSON.stringify(registry)
@@ -86,6 +89,11 @@ Page({
       })
     } else if (registry.state == 4) {
       wx.navigateTo({
+        url: '../cancelled/cancelled?json=' + json,
+        events: events
+      })
+    } else {
+      wx.navigateTo({
         url: '../expired/expired?json=' + json,
         events: events
       })
@@ -106,7 +114,7 @@ Page({
     const that = this
     this.showLoading()
     wx.request({
-      url: 'http://192.168.0.100:8888/v1/authorize?code=' + code,
+      url: url + '/v1/authorize?code=' + code,
       success(res: any) {
         app.token = res.data.data
         that.list(true)

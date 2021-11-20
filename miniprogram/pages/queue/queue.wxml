@@ -11,7 +11,9 @@
     查看详情
   </van-button>
 
-  <van-button type="danger" custom-class="mt-32">
+  <van-dialog id="van-dialog" />
+
+  <van-button type="danger" custom-class="mt-32" bind:click="onCancel">
     撤消申请
   </van-button>
 </view>
