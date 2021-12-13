@@ -114,7 +114,7 @@ Page({
     const that = this
     this.showLoading()
     wx.request({
-      url: url + '/v1/authorize?code=' + code,
+      url: url() + '/v1/authorize?code=' + code,
       success(res: any) {
         app.token = res.data.data
         that.list(true)
@@ -129,7 +129,7 @@ Page({
   list(refresh: boolean) {
     let that = this
     wx.request({
-      url: 'http://192.168.0.100:8888/v1/registries',
+      url: url() + '/v1/registries',
       header: {
         'token': app.token
       },

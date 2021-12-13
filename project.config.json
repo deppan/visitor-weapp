@@ -1,5 +1,5 @@
 {
-  "description": "项目配置文件",
+  "description": "高校信息化解决方案",
   "packOptions": {
     "ignore": []
   },
@@ -26,9 +26,9 @@
     "uploadWithSourceMap": true,
     "compileHotReLoad": false,
     "lazyloadPlaceholderEnable": false,
-    "useMultiFrameRuntime": false,
-    "useApiHook": false,
-    "useApiHostProcess": false,
+    "useMultiFrameRuntime": true,
+    "useApiHook": true,
+    "useApiHostProcess": true,
     "babelSetting": {
       "ignore": [],
       "disablePlugins": [],
@@ -50,6 +50,6 @@
   },
   "simulatorType": "wechat",
   "simulatorPluginLibVersion": {},
-  "appid": "wx99fb7355019bf9af",
+  "appid": "wx2a1ba343416ee5ad",
   "condition": {}
 }

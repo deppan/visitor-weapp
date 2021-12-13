@@ -14,7 +14,7 @@
 
           <text class="text-gray-500 text-sm my-4">{{item.department}} - {{item.staff}}</text>
 
-          <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark}}</view>
+          <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark||' '}}</view>
         </view>
       </view>
     </recycle-item>

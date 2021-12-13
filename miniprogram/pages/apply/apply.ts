@@ -9,18 +9,35 @@ Page({
     campusPicker: false,
     staffPicker: false,
     username: '',
+    hint_username: '请输入姓名',
+    err_username: '',
     mobile: '',
+    hint_mobile: '请输入手机号',
+    err_mobile: '',
     identityCard: '',
+    hint_identityCard: '请输入身份证号',
+    err_identityCard: '',
     visitTime: '',
+    hint_visitTime: '选择到访时间',
+    err_visitTime: '',
     licensePlate: '',
     healthCode: [],
+    hint_healthCode: '上传健康码',
+    err_healthCode: '',
     tripCode: [],
+    hint_tripCode: '上传行程码',
+    err_tripCode: '',
     campusId: 0,
     campus: '',
+    hint_campus: '选择校区',
+    err_campus: '',
     campuses: [],
     staffId: '',
     staff: '',
+    hint_staff: '选择教工',
+    err_staff: '',
     staffMap: new Map(),
+    cacheDepartments: [],
     departments: [{
       values: [],
       className: 'column1',
@@ -40,7 +57,7 @@ Page({
     let that = this
     this.showLoading()
     wx.request({
-      url: url + '/v1/campuses',
+      url: url() + '/v1/campuses',
       method: 'GET',
       header: {
         'token': app.token
@@ -68,6 +85,7 @@ Page({
             }
             that.setData({
               campuses: campuses,
+              cacheDepartments: departments,
               departments: [{
                 values: departments,
                 className: 'column1',
@@ -86,7 +104,7 @@ Page({
         that.setData({ loading: false })
         that.hideLoading()
       },
-      fail: (res: any) => {
+      fail: () => {
         that.hideLoading()
         wx.navigateBack()
       }
@@ -109,7 +127,6 @@ Page({
   },
 
   onCampusConfirm(event: any) {
-    console.log(event)
     let name = event.detail.value.name
     if (name != null && name != this.data.campus) {
       this.setData({
@@ -119,7 +136,9 @@ Page({
         staffId: '',
       })
     }
-
+    const picker = this.selectComponent('#picker')
+    const children = picker.getColumnValues(1)
+    picker.setColumnValues(2, this.data.staffMap.get(this.data.campusId + '_' + children[picker.getIndexes()[1]].code) || [])
     this.onClose()
   },
 
@@ -130,6 +149,8 @@ Page({
       picker.setColumnValues(1, children);
       if (children.length > 0) {
         picker.setColumnValues(2, this.data.staffMap.get(this.data.campusId + '_' + children[0].code) || [])
+      } else {
+        picker.setColumnValues(2, [])
       }
     } else if (index == 1) {
       const key = this.data.campusId + '_' + value[1].code
@@ -156,6 +177,32 @@ Page({
       this.setData({ mobile: text })
     } else if (event.target.id === 'identity_card') {
       this.setData({ identityCard: text })
+    } else if (event.target.id === 'remark') {
+      this.setData({ remark: text })
+    }
+  },
+
+  onInputBlur(event: any) {
+    const value = event.detail.value
+    const id = event.target.id
+    if (id == 'username') {
+      if (value.length == 0) {
+        this.setData({ err_username: this.data.hint_username })
+      } else {
+        this.setData({ err_username: '' })
+      }
+    } else if (id == 'mobile') {
+      if (value.length == 0) {
+        this.setData({ err_mobile: this.data.hint_mobile })
+      } else {
+        this.setData({ err_mobile: '' })
+      }
+    } else if (id == 'identity_card') {
+      if (!/(?:^\d{15}$)|(?:^\d{18}$)|^\d{17}[\dXx]$/.test(value)) {
+        this.setData({ err_identityCard: this.data.hint_identityCard })
+      } else {
+        this.setData({ err_identityCard: '' })
+      }
     }
   },
 
@@ -211,9 +258,15 @@ Page({
   afterRead(event: any) {
     const { file, name } = event.detail
     if (name == "healthCode") {
-      this.setData({ healthCode: this.data.healthCode.concat(file) })
+      this.setData({
+        healthCode: this.data.healthCode.concat(file),
+        err_healthCode: ''
+      })
     } else if (name == "tripCode") {
-      this.setData({ tripCode: this.data.tripCode.concat(file) })
+      this.setData({
+        tripCode: this.data.tripCode.concat(file),
+        err_tripCode: ''
+      })
     }
   },
 
@@ -221,7 +274,48 @@ Page({
     wx.showToast({ title: '图片大小不能超过 2M', icon: 'none' });
   },
 
+  a() {
+    wx.showToast({
+      title: '还有内容未录入',
+      icon: 'error',
+      duration: 2000
+    })
+  },
   onSubmit() {
+    if (this.data.username.length == 0) {
+      this.setData({ err_username: this.data.hint_username })
+      this.a()
+      return
+    }
+    if (this.data.mobile.length == 0) {
+      this.setData({ err_mobile: this.data.hint_mobile })
+      return
+    }
+    if (this.data.identityCard.length == 0) {
+      this.setData({ err_identityCard: this.data.hint_identityCard })
+      return
+    }
+    if (this.data.visitTime.length == 0) {
+      this.setData({ err_visitTime: this.data.hint_visitTime })
+      return
+    }
+    if (this.data.campus.length == 0) {
+      this.setData({ err_campus: this.data.hint_campus })
+      return
+    }
+    if (this.data.staff.length == 0) {
+      this.setData({ err_staff: this.data.hint_staff })
+      return
+    }
+    if (this.data.healthCode.length == 0) {
+      this.setData({ err_healthCode: this.data.hint_healthCode })
+      return
+    }
+    if (this.data.tripCode.length == 0) {
+      this.setData({ err_tripCode: this.data.hint_tripCode })
+      return
+    }
+
     try {
       let formData = new FormData();
       formData.append('username', this.data.username)
@@ -237,7 +331,7 @@ Page({
       formData.appendFile('trip_code', this.data.tripCode[0].url)
       let data = formData.getData()
       wx.request({
-        url: url + '/v1/registry',
+        url: url() + '/v1/registry',
         data: data.buffer,
         method: 'POST',
         header: {
@@ -246,13 +340,13 @@ Page({
         },
         success: (res: any) => {
           if (res.statusCode == 200) {
-            let json = JSON.stringify(res.data)
+            let json = JSON.stringify(res.data.data)
             wx.redirectTo({
               url: '../queue/queue?json=' + json
             })
           }
 
-          console.log(res)
+          console.log(res.data.data)
         },
         fail: (res: any) => {
           console.log(res)

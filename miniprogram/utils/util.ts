@@ -18,4 +18,11 @@ const formatNumber = (n: number) => {
   return s[1] ? s : '0' + s
 }
 
-export const url = "http://192.168.0.100:8888"
+export const url = () => {
+  let version = wx.getAccountInfoSync().miniProgram.envVersion
+  if (version == 'develop') {
+    return "http://192.168.0.100:8000"
+  } else {
+    return "https://api.visitor.congrenkeji.com"
+  }
+}

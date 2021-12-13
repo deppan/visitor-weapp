@@ -1,22 +1,22 @@
 <view class="flex;flex-col" hidden="{{loading}}">
   <van-cell-group>
-    <van-field id="username" clearable value="{{ username }}" required label="姓名" placeholder="请输入姓名" bind:change="onTextChange" />
+    <van-field id="username" clearable value="{{ username }}" required label="姓名" placeholder="{{hint_username}}" bind:blur="onInputBlur" bind:change="onTextChange" error-message="{{err_username}}" />
 
-    <van-field id="mobile" clearable value="{{ mobile }}" required label="手机号" type="phone" placeholder="请输入手机号" bind:change="onTextChange" />
+    <van-field id="mobile" clearable value="{{ mobile }}" required label="手机号" type="phone" placeholder="{{hint_mobile}}" bind:blur="onInputBlur" bind:change="onTextChange" error-message="{{err_mobile}}" />
 
-    <van-field id="identity_card" clearable value="{{ identityCard }}" required label="身份证号" placeholder="请输入身份证号" bind:change="onTextChange" />
+    <van-field id="identity_card" clearable value="{{ identityCard }}" required label="身份证号" placeholder="{{hint_identityCard}}" bind:change="onTextChange" bind:blur="onInputBlur" error-message="{{err_identityCard}}" />
 
-    <van-field value="{{ visitTime }}" required is-link readonly label="到访时间" placeholder="点击选择到访时间" bind:click-input="showPopup" />
+    <van-field value="{{ visitTime }}" required is-link readonly label="到访时间" placeholder="{{hint_visitTime}}" bind:click-input="showPopup" error-message="{{err_visitTime}}" />
 
-    <van-field value="{{ campus }}" required is-link readonly label="校区" placeholder="点击选择校区" bind:click-input="showCampus" />
+    <van-field value="{{ campus }}" required is-link readonly label="校区" placeholder="{{hint_campus}}" bind:click-input="showCampus" error-message="{{err_campus}}" />
 
-    <van-field value="{{ staff }}" required is-link readonly label="教工" disabled="{{campus.length==0}}" placeholder="点击选择教工" bind:click-input="showStaff" />
+    <van-field value="{{ staff }}" required is-link readonly label="教工" disabled="{{campus.length==0}}" placeholder="{{hint_staff}}" bind:click-input="showStaff" error-message="{{err_staff}}" />
 
-    <van-field id="health_code" required label="健康码">
+    <van-field id="health_code" required label="健康码" error-message="{{err_healthCode}}">
       <van-uploader slot="input" name="healthCode" file-list="{{ healthCode }}" bind:oversize="oversize" bind:delete="delete" bind:after-read="afterRead" deletable="{{ true }}" max-count="1" max-size="{{2000 * 1024}}" />
     </van-field>
 
-    <van-field id="trip_code" required label="行程码">
+    <van-field id="trip_code" required label="行程码" error-message="{{err_tripCode}}">
       <van-uploader slot="input" name="tripCode" file-list="{{tripCode}}" bind:oversize="oversize" bind:delete="delete" bind:after-read="afterRead" deletable="{{ true }}" max-count="1" max-size="{{2000 * 1024}}" />
     </van-field>
 
@@ -32,7 +32,7 @@
   </van-popup>
 
   <van-popup show="{{ staffPicker }}" round position="bottom">
-    <van-picker show-toolbar columns="{{ departments }}" bind:change="onStaffChange" bind:confirm="onStaffConfirm" bind:cancel="onClose" value-key="name" />
+    <van-picker id="picker" show-toolbar columns="{{ departments }}" bind:change="onStaffChange" bind:confirm="onStaffConfirm" bind:cancel="onClose" value-key="name" />
   </van-popup>
 
   <van-button type="primary" style="margin: 20rpx 0;" class="flex" bind:click="onSubmit">提交</van-button>
