@@ -22,6 +22,7 @@ export const url = () => {
   let version = wx.getAccountInfoSync().miniProgram.envVersion
   if (version == 'develop') {
     return "http://192.168.0.100:8000"
+    // return "https://api.visitor.congrenkeji.com"
   } else {
     return "https://api.visitor.congrenkeji.com"
   }

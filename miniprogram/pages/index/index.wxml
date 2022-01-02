@@ -1,9 +1,9 @@
 <wxs src="../helper.wxs" module="helper" />
 
 <view class="flex flex-col">
-  <recycle-view batch="{{batchSetRecycleData}}" id="recycleId" style="margin-bottom: 150rpx;">
-    <recycle-item id="{{item.__index__}}" style="width:{{width}}px; height:120px;" wx:for="{{recycleList}}" wx:key="id" bindtap="bindItemClick">
-      <view style="height: 100%;">
+  <scroll-view class="scroll" style="height:100%; padding-bottom: 64px;" scroll-y="true">
+    <view class="block" wx:for="{{registries}}" wx:for-item="item" wx:key="id">
+      <view id="{{index}}" bindtap="bindItemClick">
         <view class="card">
           <view class="flex items-center">
             <text class="text-gray-700">{{helper.stateValue(item.state)}}</text>
@@ -17,8 +17,8 @@
           <view class="van-ellipsis text-gray-500 text-sm my-4">{{item.remark||' '}}</view>
         </view>
       </view>
-    </recycle-item>
-  </recycle-view>
+    </view>
+  </scroll-view>
 
   <!-- <view class="userinfo">
     <block wx:if="{{canIUseOpenData}}">
@@ -55,12 +55,6 @@
       <van-button round type="warning" size="mini" custom-class="w-auto item">撤消</van-button>
     </view>
   </view> -->
-
-  <!-- <van-button type="default" bind:click="bindA">创建</van-button>
-  <van-button type="primary" bind:click="bindB">管理员详情</van-button>
-  <van-button type="info" bind:click="bindUserLanding">用户详情</van-button>
-  <van-button type="warning" bind:click="bindPass">通过</van-button>
-  <van-button type="danger" bind:click="bindReject">驳回</van-button> -->
 
   <view class="fixed bottom-0 right-0" style="margin: 24px;">
     <van-button round icon="plus" type="info" bind:click="bindCreate" custom-class="action-button" />
